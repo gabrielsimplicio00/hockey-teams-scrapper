@@ -22,7 +22,7 @@ import puppeteer from "puppeteer";
     return elements.map((element) => element.textContent.trim());
   });
 
-  const teamsData = [];
+  const teamData = [];
   const teamsInfo = [];
 
   for (let team of teamNames) {
@@ -33,10 +33,10 @@ import puppeteer from "puppeteer";
     teamsRow = await page.$$(".team");
 
     for (let teamRow of teamsRow) {
-      teamsData.push({ ...(await getTeamInfo(teamRow)) });
+      teamData.push({ ...(await getTeamInfo(teamRow)) });
     }
-    teamsInfo.push({ team, teamsData });
-    teamsData.splice(0);
+    teamsInfo.push({ team, teamData });
+    teamData.splice(0);
 
     await page.focus("#q");
     await page.keyboard.down("Control");
@@ -92,7 +92,7 @@ async function getTeamInfo(rowElement) {
 
 // function to get data through all of the pages, one by one
 // async function paginateAndGetData(page) {
-//   const teamsData = [];
+//   const teamData = [];
 
 //   const pagesList = await page.$$eval(".pagination li a", (elements) => {
 //     return elements.map((element) => element.getAttribute("href"));
